@@ -1,0 +1,66 @@
+<div class="container">
+  <mat-form-field appearance="outline">
+    <input matInput placeholder="Aranacak habere ilişkin değer girin" (keyup)="Filtrele($event)">
+  </mat-form-field>
+  <button mat-fab matTooltip="Haber Ekle" color="primary" (click)="Ekle()">
+    <mat-icon aria-label="label">add</mat-icon>
+  </button>
+  
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="haberId">
+      <mat-header-cell  *matHeaderCellDef  mat-sort-header> Haber ID
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.haberId}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="haberBaslik" >
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Haber Başlık
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.haberBaslik}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="haberKatId" >
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Haber Kategori ID
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.haberKatId}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="haberKatAdi" >
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Kategori Adı
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.haberKatAdi}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="haberIcerik" >
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Haber İçeriği
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.haberIcerik}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="haberGorsel" >
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Haber Görseli
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> <img width="200px" [src]="kayit.haberGorsel" />  </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="islemler">
+      <mat-header-cell *matHeaderCellDef> İşlemler
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> 
+      
+        <button mat-icon-button color="primary" matTooltip="Haberi Aç">
+          <mat-icon aria-label="label">article</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" matTooltip="Haber Düzenle" (click)="Duzenle(kayit)">
+          <mat-icon aria-label="label">edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" matTooltip="Haber Sil" (click)="Sil(kayit)">
+          <mat-icon aria-label="label">delete</mat-icon>
+        </button>
+        
+      </mat-cell>
+    </ng-container>
+  
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+<mat-paginator 
+    
+      [pageSizeOptions]="[10, 15, 25, 100]" showFirstLastButtons>
+</mat-paginator>
+</div>
